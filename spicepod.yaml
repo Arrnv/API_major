@@ -1,0 +1,30 @@
+apiVersion: spiceai.io/v1
+kind: Spicepod
+metadata:
+  name: cardio-predict
+spec:
+  datasources:
+    - name: cardio-fastapi-datasource
+      http:
+        url: "http://0.0.0.0:8000/prediction" # Replace with your FastAPI server IP and port
+        method: POST
+        headers:
+          Content-Type: "application/json"
+        body: |
+          {
+            "gender": "{{ gender }}",
+            "cholesterol": "{{ cholesterol }}",
+            "gluc": "{{ gluc }}",
+            "smoke": "{{ smoke }}",
+            "alco": "{{ alco }}",
+            "active": "{{ active }}",
+            "age_years": "{{ age_years }}",
+            "bmi": "{{ bmi }}",
+            "bp_category": "{{ bp_category }}",
+            "mean_arterial_pressure": "{{ mean_arterial_pressure }}",
+            "pulse_pressure": "{{ pulse_pressure }}"
+          }
+  actions:
+    - name: make_prediction
+      endpoint: "http://0.0.0.0:8000/prediction"
+      method: POST
