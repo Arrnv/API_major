@@ -1,7 +1,7 @@
-apiVersion: spiceai.io/v1
+version: v1beta1
 kind: Spicepod
-metadata:
-  name: cardio-predict
+
+name: cardio-predict
 spec:
   datasources:
     - name: cardio-fastapi-datasource
